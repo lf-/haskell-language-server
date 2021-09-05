@@ -103,6 +103,10 @@
         in {
           inherit hlsSources;
 
+          tracy = super.tracy.overrideAttrs (old: {
+            NIX_CFLAGS_COMPILE = old.NIX_CFLAGS_COMPILE ++ ["-Wno-format-security"];
+          });
+
           # Haskell packages extended with our packages
           hlsHpkgs = compiler: extended haskell.packages.${compiler};
 
